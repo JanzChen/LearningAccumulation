@@ -1,0 +1,10 @@
+杀进程：
+select b.owner,b.object_name,a.session_id,a.locked_mode,c.serial#,'exec kill_session('||c.sid||','||c.serial#||')'
+from v$locked_object a,dba_objects b ,v$session c
+where b.object_id = a.object_id 
+And a.session_id = c.sid ;
+
+SELECT  'exec kill_session('||t.sid||','||t.serial#||')'
+ from v$session t  WHERE USERNAME='HZSBSJKF_GGYW' AND STATUS='INACTIVE';
+
+exec kill_session(296,37407);

@@ -1,0 +1,373 @@
+﻿* {
+    font-size: 12px;
+    font-family: '宋 体, sans-serif';
+}
+
+body {
+    background: #E6EEF8;
+}
+
+img {
+    border: 0px;
+}
+
+.g_a {
+    display: -moz-inline-stack;
+    display: inline-block;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    text-decoration: none;
+}
+
+.g_a .g_b {
+    float: left;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    padding: 1px 0;
+    margin: 0 -1px;
+    position: relative;
+}
+
+.g_a .g_c {
+    float: left;
+    border-left: 1px solid #dadada;
+    border-right: 1px solid;
+    margin: 0 -2px;
+    position: relative;
+}
+
+.g_a .g_d {
+    display: block;
+    line-height: 4px;
+    border-bottom: 4px solid;
+    border-top: 6px solid;
+}
+
+.g_a .g_e {
+    display: block;
+    line-height: 16px;
+    border-bottom: 3px solid;
+    border-top: 3px solid;
+    margin-top: -14px;
+    padding: 0px 20px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/*
+  #707070
+  #F2F2F2  #EFEFEF #EBEBEB #D8D8D8 #D4D4D4 #D1D1D1
+*/
+a.g_a {
+    text-decoration: none;
+    background-color: #EBEBEB;
+    color: #333333;
+}
+
+a.g_a .g_c {
+    background-color: #D4D4D4;
+}
+
+a.g_a .g_d {
+    border-bottom-color: #D8D8D8;
+    background-color: #EBEBEB;
+    border-top-color: #EFEFEF;
+}
+
+a.g_a .g_e {
+    border-bottom-color: #D1D1D1;
+    border-top-color: #F2F2F2;
+}
+
+a.g_a {
+    border-bottom-color: #707070;
+    border-top-color: #707070;
+}
+
+a.g_a .g_b {
+    border-left-color: #707070;
+    border-right-color: #707070;
+}
+
+a.g_a .g_c {
+    border-left-color: #707070;
+    border-right-color: #707070;
+}
+
+/*
+ border:#3C7FB1;
+
+ #E8F6FD #E1F3FC #DCF1FC #BCE5FC  #AFDEF8 #A7D9F5
+*/
+a.ga_hover {
+    text-decoration: none;
+    background-color: #E8F6FD;
+    color: #333333;
+}
+
+a.ga_hover .g_c {
+    background-color: #AFDEF8;
+}
+
+a.ga_hover .g_d {
+    border-bottom-color: #BCE5FC;
+    background-color: #DCF1FC;
+    border-top-color: #E1F3FC;
+}
+
+a.ga_hover .g_e {
+    border-bottom-color: #A7D9F5;
+    border-top-color: #E8F6FD;
+}
+
+a.ga_hover {
+    border-bottom-color: #3C7FB1;
+    border-top-color: #3C7FB1;
+}
+
+a.ga_hover .g_b {
+    border-left-color: #3C7FB1;
+    border-right-color: #3C7FB1;
+}
+
+a.ga_hover .g_c {
+    border-left-color: #3C7FB1;
+    border-right-color: #3C7FB1;
+}
+
+/*
+#3C7FB1
+
+#3FCEF2
+*/
+a.ga_active {
+    background-color: #3FCEF2;
+    color: #333333;
+}
+
+a.ga_active {
+    border-bottom-color: #3C7FB1;
+    border-top-color: #3C7FB1;
+}
+
+a.ga_active .g_b {
+    border-left-color: #3C7FB1;
+    border-right-color: #3C7FB1;
+}
+
+a.ga_active .g_c {
+    border-left-color: #3C7FB1;
+    border-right-color: #3C7FB1;
+}
+
+a.ga_active .g_p_fix {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border: 1px solid #3FCEF2;
+    border-top: 0px;
+    border-bottom: 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+/***********for dialogbutton***************/
+
+.dialog-button .g_a {
+    display: -moz-inline-stack;
+    display: inline-block;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    text-decoration: none;
+}
+
+.dialog-button .g_a .g_b {
+    float: left;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    padding: 1px 0;
+    margin: 0 -1px;
+    position: relative;
+}
+
+.dialog-button .g_a .g_c {
+    float: left;
+    border-left: 1px solid #dadada;
+    border-right: 1px solid;
+    margin: 0 -2px;
+    position: relative;
+}
+
+.dialog-button .g_a .g_d {
+    display: block;
+    line-height: 4px;
+    border-bottom: 4px solid;
+    border-top: 5px solid;
+}
+
+.dialog-button .g_a .g_e {
+    display: block;
+    line-height: 13px;
+    border-bottom: 2px solid;
+    border-top: 2px solid;
+    margin-top: -11px;
+    padding: 0px 20px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/*
+  #707070
+  #F2F2F2  #EFEFEF #EBEBEB #D8D8D8 #D4D4D4 #D1D1D1
+*/
+.dialog-button a.g_a {
+    text-decoration: none;
+    background-color: #EBEBEB;
+    color: #333333;
+}
+
+.dialog-button a.g_a .g_c {
+    background-color: #D4D4D4;
+}
+
+.dialog-button a.g_a .g_d {
+    border-bottom-color: #D8D8D8;
+    background-color: #EBEBEB;
+    border-top-color: #EFEFEF;
+}
+
+.dialog-button a.g_a .g_e {
+    border-bottom-color: #D1D1D1;
+    border-top-color: #F2F2F2;
+}
+
+.dialog-button a.g_a {
+    border-bottom-color: #707070;
+    border-top-color: #707070;
+}
+
+.dialog-button a.g_a .g_b {
+    border-left-color: #707070;
+    border-right-color: #707070;
+}
+
+.dialog-button a.g_a .g_c {
+    border-left-color: #707070;
+    border-right-color: #707070;
+}
+
+/*
+ border:#3C7FB1;
+
+ #E8F6FD #E1F3FC #DCF1FC #BCE5FC  #AFDEF8 #A7D9F5
+*/
+.dialog-button a.ga_hover {
+    text-decoration: none;
+    background-color: #E8F6FD;
+    color: #333333;
+}
+
+.dialog-button a.ga_hover .g_c {
+    background-color: #AFDEF8;
+}
+
+.dialog-button a.ga_hover .g_d {
+    border-bottom-color: #BCE5FC;
+    background-color: #DCF1FC;
+    border-top-color: #E1F3FC;
+}
+
+.dialog-button a.ga_hover .g_e {
+    border-bottom-color: #A7D9F5;
+    border-top-color: #E8F6FD;
+}
+
+.dialog-button a.ga_hover {
+    border-bottom-color: #3C7FB1;
+    border-top-color: #3C7FB1;
+}
+
+.dialog-button a.ga_hover .g_b {
+    border-left-color: #3C7FB1;
+    border-right-color: #3C7FB1;
+}
+
+.dialog-button a.ga_hover .g_c {
+    border-left-color: #3C7FB1;
+    border-right-color: #3C7FB1;
+}
+
+/*
+#3C7FB1
+
+#3FCEF2
+*/
+.dialog-button a.ga_active {
+    background-color: #3FCEF2;
+    color: #333333;
+}
+
+.dialog-button a.ga_active {
+    border-bottom-color: #3C7FB1;
+    border-top-color: #3C7FB1;
+}
+
+.dialog-button a.ga_active .g_b {
+    border-left-color: #3C7FB1;
+    border-right-color: #3C7FB1;
+}
+
+.dialog-button a.ga_active .g_c {
+    border-left-color: #3C7FB1;
+    border-right-color: #3C7FB1;
+}
+
+.dialog-button a.ga_active .g_p_fix {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border: 1px solid #ff0000;
+    border-top: 0px;
+    border-bottom: 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+/**********************for dialog buttom**************************/
+
+.btn-icon {
+    padding-left: 20px;
+}
+
+.easyui-linkbutton {
+    margin: 0px 5px;
+}
+
+.fix-left-boder {
+    background: none;
+    width: 1px;
+    position: absolute;
+    left: 0px;
+    bottom: 14px;
+    top: 8px; /*height:350px;*/
+}
+
+.fix-right-boder {
+    width: 1px;
+    background: none;
+    width: 1px;
+    position: absolute;
+    right: 0px;
+    bottom: 14px;
+    top: 8px;
+}
+
+.window .panel-title {
+    color: #061640
+}
+
+.messager-success {
+    background: url("../images/messager_success.gif") no-repeat scroll;
+}

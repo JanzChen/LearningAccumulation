@@ -1,0 +1,101 @@
+.x-form-field {
+    MARGIN: 0px;
+}
+
+.x-form-text {
+    BORDER-BOTTOM: 1px solid;
+    BORDER-LEFT: 1px solid;
+    PADDING-BOTTOM: 1px;
+    PADDING-LEFT: 3px;
+    PADDING-RIGHT: 3px;
+    BACKGROUND: repeat-x 0px 0px;
+    BORDER-TOP: 1px solid;
+    BORDER-RIGHT: 1px solid;
+    PADDING-TOP: 3px;
+}
+
+TEXTAREA.x-form-field {
+    BORDER-BOTTOM: 1px solid;
+    BORDER-LEFT: 1px solid;
+    PADDING-BOTTOM: 1px;
+    PADDING-LEFT: 3px;
+    PADDING-RIGHT: 3px;
+    BACKGROUND: repeat-x 0px 0px;
+    BORDER-TOP: 1px solid;
+    BORDER-RIGHT: 1px solid;
+    PADDING-TOP: 1px
+}
+
+TEXTAREA.x-form-field {
+    PADDING-BOTTOM: 2px;
+    PADDING-LEFT: 3px;
+    PADDING-RIGHT: 3px;
+    PADDING-TOP: 2px;
+}
+
+.x-form-text {
+    LINE-HEIGHT: 16px;
+    HEIGHT: 16px;
+    VERTICAL-ALIGN: middle;
+}
+
+TEXTAREA {
+    resize: none;
+}
+
+.x-form-label-right LABEL.x-form-item-label {
+    TEXT-ALIGN: right;
+    padding-top: 4px;
+}
+
+.x-fieldset {
+    BORDER-BOTTOM: 1px solid;
+    BORDER-LEFT: 1px solid;
+    PADDING-BOTTOM: 10px;
+    PADDING-LEFT: 10px;
+    PADDING-RIGHT: 10px;
+    DISPLAY: block;
+    MARGIN-BOTTOM: 10px;
+    BORDER-TOP: 1px solid;
+    BORDER-RIGHT: 1px solid;
+    PADDING-TOP: 10px;
+}
+
+.x-fieldset LEGEND {
+    margin-left: 10px;
+}
+
+.x-form-field {
+    FONT: 12px tahoma, arial, helvetica, sans-serif;
+    HEIGHT: 15px;
+}
+
+.x-form-text {
+    BACKGROUND-IMAGE: url(../images/text-bg.gif);
+    BORDER-BOTTOM-COLOR: #95B8E7;
+    BACKGROUND-COLOR: #fff;
+    BORDER-TOP-COLOR: #95B8E7;
+    BORDER-RIGHT-COLOR: #95B8E7;
+    BORDER-LEFT-COLOR: #95B8E7;
+}
+
+TEXTAREA.x-form-field {
+    BACKGROUND-IMAGE: url(../images/text-bg.gif);
+    BORDER-BOTTOM-COLOR: #95B8E7;
+    BACKGROUND-COLOR: #fff;
+    BORDER-TOP-COLOR: #95B8E7;
+    BORDER-RIGHT-COLOR: #95B8E7;
+    BORDER-LEFT-COLOR: #95B8E7;
+}
+
+.x-fieldset {
+    BORDER-BOTTOM-COLOR: #95B8E7;
+    BORDER-TOP-COLOR: #95B8E7;
+    BORDER-RIGHT-COLOR: #95B8E7;
+    BORDER-LEFT-COLOR: #95B8E7;
+}
+
+.x-fieldset LEGEND {
+    FONT: bold 11px tahoma, arial, helvetica, sans-serif;
+    COLOR: #15428b;
+}

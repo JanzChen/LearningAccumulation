@@ -1,0 +1,108 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0042)http://tool.chinaz.com/Tools/JsFormat.aspx -->
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+	<HEAD>
+		<TITLE>JavaScript/HTML格式化</TITLE>
+		<META http-equiv=Content-Type content="text/html; charset=utf-8">
+		<LINK href="/Controls/Images/Chinaz.ico" type=image/x-icon rel="shortcut icon">
+		<LINK href="js/toolsite.css" type=text/css rel=stylesheet>
+		<SCRIPT src="js/menu.js" type=text/javascript></SCRIPT>
+		<SCRIPT src="js/common.js" type=text/javascript></SCRIPT>
+		<SCRIPT src="js/globals.js" type=text/javascript></SCRIPT>
+		<SCRIPT src="js/home.js" type=text/javascript></SCRIPT>
+		<META content="MSHTML 6.00.2900.5726" name=GENERATOR>
+	</HEAD>
+	<BODY>
+		<DIV class=wrap>
+			<DIV class=main>
+				<SCRIPT src="js/base.js" type=text/javascript></SCRIPT>
+				<SCRIPT src="js/jsformat.js" type=text/javascript></SCRIPT>
+				<SCRIPT src="js/jsformat2.js" type=text/javascript></SCRIPT>
+				<SCRIPT src="js/htmlformat.js" type=text/javascript></SCRIPT>
+				<SCRIPT type=text/javascript>
+function do_js_beautify() {
+	document.getElementById("beautify").disabled = true;
+	js_source = document.getElementById("content").value.replace(/^\s+/, "");
+	tabsize = document.getElementById("tabsize").value;
+	tabchar = " ";
+	if (tabsize == 1) {
+		tabchar = "\t";
+	}
+	if (js_source && js_source.charAt(0) === "<") {
+		document.getElementById("content").value = style_html(js_source, tabsize, tabchar, 80);
+	} else {
+		document.getElementById("content").value = js_beautify(js_source, tabsize, tabchar);
+	}
+	document.getElementById("beautify").disabled = false;
+	return false;
+}
+function pack_js(base64) {
+	var input = document.getElementById("content").value;
+	var packer = new Packer;
+	if (base64) {
+		var output = packer.pack(input, 1, 0);
+	} else {
+		var output = packer.pack(input, 0, 0);
+	}
+	document.getElementById("content").value = output;
+}
+function copy() {
+	var Result = document.getElementById("content").value;
+	if (document.getElementById("content").value != "") {
+		window.clipboardData.setData("Text", Result);
+		document.getElementById("content").select();
+		window.alert("\u5df2\u590d\u5236\u6210\u529f\uff01");
+	}
+}
+function Empty() {
+	document.getElementById("content").value = "";
+	document.getElementById("content").select();
+}
+function GetFocus() {
+	document.getElementById("content").focus();
+}
+
+</SCRIPT>
+				<FORM id=aspnetForm name=aspnetForm action=JsFormat.aspx method=post>
+					<DIV>
+						<INPUT id=__VIEWSTATE type=hidden value=/wEPDwUJMzkzMDQxMTYwZGQ= name=__VIEWSTATE>
+					</DIV>
+					<DIV class=box>
+						<DIV id=b_1>
+							<DIV class=box1>
+								<DIV style="FONT-WEIGHT: bold; FONT-SIZE: 16px; COLOR: #006aad" align=center>
+									JavaScript/HTML格式化
+								</DIV>
+								<DIV style="PADDING-TOP: 10px" align=center>
+									<TEXTAREA id=content style="BORDER-RIGHT: #c5e2f2 1px solid; BORDER-TOP: #c5e2f2 1px solid; OVERFLOW: visible; BORDER-LEFT: #c5e2f2 1px solid; WIDTH: 850px; BORDER-BOTTOM: #c5e2f2 1px solid; HEIGHT: 600px" name=content rows=20></TEXTAREA>
+									<SCRIPT type=text/javascript>setTimeout("GetFocus();",10)</SCRIPT>
+								</DIV>
+								<DIV style="PADDING-RIGHT: 0px; PADDING-LEFT: 6px; PADDING-BOTTOM: 0px; PADDING-TOP: 7px">
+									<SELECT id=tabsize name=tabsize>
+										<OPTION value=1>
+											制表符缩进
+										</OPTION>
+										<OPTION value=2>
+											2个空格缩进
+										</OPTION>
+										<OPTION value=4 selected>
+											4个空格缩进
+										</OPTION>
+										<OPTION value=8>
+											8个空格缩进
+										</OPTION>
+									</SELECT>
+									<INPUT class=but id=beautify onclick="return do_js_beautify()" type=button value=格式化>
+									<INPUT class=but onclick=pack_js(0) type=button value=普通压缩>
+									<INPUT class=but onclick=pack_js(1) type=button value=加密压缩>
+									<INPUT class=but onclick=copy(); type=button value=复制>
+									<INPUT class=but onclick=Empty(); type=button value=清空结果>
+								</DIV>
+							</DIV>
+						</DIV>
+					</DIV>
+				</FORM>
+			</DIV>
+		</DIV>
+	</BODY>
+</HTML>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+ <head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" /> 
+  <meta charset="utf-8" /> 
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" /> 
+  <title>JSON压缩转义工具</title> 
+  <meta property="qc:admins" content="14002146716252376637571563176" /> 
+  <script src="JSON%E5%8E%8B%E7%BC%A9%E8%BD%AC%E4%B9%89%E5%B7%A5%E5%85%B7-BeJSON.com_files/jquery.js"></script> 
+  <link href="JSON%E5%8E%8B%E7%BC%A9%E8%BD%AC%E4%B9%89%E5%B7%A5%E5%85%B7-BeJSON.com_files/bootstrap.css" rel="stylesheet" /> 
+  <script src="JSON%E5%8E%8B%E7%BC%A9%E8%BD%AC%E4%B9%89%E5%B7%A5%E5%85%B7-BeJSON.com_files/bootstrap.js"></script> 
+  <script src="JSON%E5%8E%8B%E7%BC%A9%E8%BD%AC%E4%B9%89%E5%B7%A5%E5%85%B7-BeJSON.com_files/jquery-linedtextarea.js" type="text/javascript"></script> 
+  <link href="JSON%E5%8E%8B%E7%BC%A9%E8%BD%AC%E4%B9%89%E5%B7%A5%E5%85%B7-BeJSON.com_files/jquery-linedtextarea.css" type="text/css" rel="stylesheet" /> 
+  <script type="text/javascript" src="JSON%E5%8E%8B%E7%BC%A9%E8%BD%AC%E4%B9%89%E5%B7%A5%E5%85%B7-BeJSON.com_files/jsl.js"></script> 
+  <!--[if IE]><link rel="stylesheet" href="/static/js/c/css/blueprint/lib/ie.css" type="text/css" media="screen, projection"><![endif]--> 
+  <link rel="stylesheet" href="JSON%E5%8E%8B%E7%BC%A9%E8%BD%AC%E4%B9%89%E5%B7%A5%E5%85%B7-BeJSON.com_files/css-classes.css" type="text/css" media="screen, projection" /> 
+  <link rel="stylesheet" href="JSON%E5%8E%8B%E7%BC%A9%E8%BD%AC%E4%B9%89%E5%B7%A5%E5%85%B7-BeJSON.com_files/screen.css" type="text/css" media="screen, projection" /> 
+  <style>
+		.linedwrap{width:100%}
+	.linedwrap .codelines .lineno {  font-size: 1.1em;}
+	#json_input{font-size:11px;padding:0px;width:100%;  border-radius: 4px;}
+</style> 
+ </head>
+ <body>
+  <div class="panel panel-default" align='center'> 
+   <div class="panel-heading"> 
+    <div class="media"> 
+     <div class="media-body"> 
+      <h4 class="media-heading">JSON压缩转义工具</h4> 
+     </div> 
+    </div> 
+   </div> 
+   <div class="panel-body"> 
+    <form id="JSONVYasuo" method="post" action="http://www.bejson.com/." name="JSONVYasuo"> 
+     <input id="reformat" value="1" type="hidden" /> 
+     <input id="compress" value="0" type="hidden" /> 
+     <div> 
+       <textarea id="json_input" name="json_input" class="json_input" rows="30" cols="100" spellcheck="false" placeholder="Enter JSON to validate" style="resize: both; width: 1078px; max-width: 1070px;height:600px;"></textarea><br/>
+      </div> 
+	  <div class="validateButtons clear" align='left' style="margin-left:22%;"> 
+	   <input value="格式化" onclick="formatJson();" type="button" /> 
+	   <input value="json转excel" onclick="json2excel()" type="button"/>
+	   <input value="压缩" onclick="yasuo(1);" type="button" /> 
+       <input value="转义" onclick="yasuo(2);" type="button" /> 
+       <input value="压缩并转义" onclick="yasuo(3);" type="button" /> 
+       <input value="去除转义" onclick="yasuo(4);" type="button" /> 
+       <input value="Unicode转中文" onclick="u2h()" type="button" /> 
+       <input value="中文转Unicode" onclick="h2u()" type="button" /> 
+       <input value="中文符号转英文符号" title="如果您从他人技术博客copy代码时,可能会因为json中重要符号被替换成中文字符而导致校验失败,这时就可以使用本功能替换" onclick="cnChar2EnChar()" type="button" /> 
+     </div> 
+     </div> 
+    </form> 
+    <script>
+			/**
+			1 压缩
+			2 转义
+			3 压缩转义
+			4.格式华
+			*/
+			function yasuo(ii){
+				 var txtA = document.getElementById("json_input");
+				 var text = txtA.value;
+					if(ii==1||ii==3){
+						 text = text.split("\n").join(" ");
+						var t = [];
+						var inString = false;
+						for (var i = 0, len = text.length; i < len; i++) {
+							var c = text.charAt(i);
+							if (inString && c === inString) {
+								// TODO: \\"
+								if (text.charAt(i - 1) !== '\\') {
+									inString = false;
+								}
+							} else if (!inString && (c === '"' || c === "'")) {
+								inString = c;
+							} else if (!inString && (c === ' ' || c === "\t")) {
+								c = '';
+							}
+							t.push(c);
+						}
+						text= t.join('');
+					}
+					if(ii==2||ii==3){
+						 text = text.replace(/\\/g,"\\\\").replace(/\"/g,"\\\"");
+					}
+					if(ii==4){
+					 text = text.replace(/\\\\/g,"\\").replace(/\\\"/g,'\"');
+					}
+					 txtA.value = text;
+			}
+			
+			String.prototype.trim=function()
+		{
+		     return this.replace(/(^\s*)|(\s*$)/g, '');
+		}
+			var GB2312UnicodeConverter={
+		  ToUnicode:function(str){
+		    var txt= escape(str).toLocaleLowerCase().replace(/%u/gi,'\\u');
+			//var txt= escape(str).replace(/([%3F]+)/gi,'\\u');
+			return txt.replace(/%7b/gi,'{').replace(/%7d/gi,'}').replace(/%3a/gi,':').replace(/%2c/gi,',').replace(/%27/gi,'\'').replace(/%22/gi,'"').replace(/%5b/gi,'[').replace(/%5d/gi,']').replace(/%3D/gi,'=').replace(/%20/gi,' ').replace(/%3E/gi,'>').replace(/%3C/gi,'<').replace(/%3F/gi,'?');//
+		  }
+		  ,ToGB2312:function(str){
+		    return unescape(str.replace(/\\u/gi,'%u'));
+		  }
+		};
+		
+		function u2h(){
+			 var txtA = document.getElementById("json_input");
+			 var text = txtA.value;
+			 text = text.trim();
+			// text = text.replace(/\u/g,"");
+			 txtA.value = GB2312UnicodeConverter.ToGB2312(text);	 
+		}
+		
+		function h2u(){
+			var txtA = document.getElementById("json_input");
+			 var text = txtA.value;
+			 text = text.trim();
+			// text = text.replace(/\u/g,"");
+			 txtA.value = GB2312UnicodeConverter.ToUnicode(text);
+		}
+		
+		function cnChar2EnChar(){
+		 var txtA = document.getElementById("json_input");
+		  var str = txtA.value;
+		str = str.replace(/\’|\‘/g,"'").replace(/\“|\”/g,"\"");
+		str = str.replace(/\【/g,"[").replace(/\】/g,"]").replace(/\｛/g,"{").replace(/\｝/g,"}");
+		str = str.replace(/，/g,",").replace(/：/g,":");
+		 txtA.value = str;
+		}
+
+		function formatJson(){
+			 var txtA = document.getElementById("json_input");
+			 var jsonStr = txtA.value;
+			 if(jsonStr==undefined||jsonStr==''){
+				alert("前填入json");
+				return;
+			 }
+			 var jsonObj=JSON.parse(jsonStr);
+			 var fmtJson=JSON.stringify(jsonObj,null,4);
+			 txtA.value=fmtJson;
+		}
+
+		function json2excel(){
+		     var txtA = document.getElementById("json_input");
+			 var jsonStr = txtA.value;
+			 if(jsonStr==undefined||jsonStr==''){
+				alert("前填入json");
+				return;
+			 }
+			 var jsonObj=JSON.parse(jsonStr);
+			 var titleArr=[];
+			 var textArr=[];
+			 var textStr='';
+			 if(jsonObj instanceof Array){
+				for(var prop in jsonObj[0]){
+					titleArr.push(prop);
+				}
+
+				for(var j=0;j<jsonObj.length;j++){
+					var tempJsonObj=jsonObj[j];
+				    for(var k=0;k<titleArr.length;k++){
+						textArr.push(tempJsonObj[titleArr[k]]);
+					}
+					var tempTextStr=textArr.join('\t')+'\r\n';
+					textStr+=tempTextStr;
+					textArr=[];
+				}
+			 }else{
+				for(var prop in jsonObj){
+					titleArr.push(prop);
+					textArr.push(jsonObj[prop]);
+				}
+				textStr+=textArr.join('\t')+'\r\n';
+			 }
+
+			 txtA.value=titleArr.join('\t')+'\r\n'+textStr;
+		
+		}
+		</script> 
+   </div> 
+   <div class="panel-footer"> 
+   </div> 
+  </div>   
+ </body>
+</html>

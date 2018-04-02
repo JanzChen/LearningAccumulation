@@ -1,0 +1,21 @@
+SET SERVEROUTPUT ON SIZE 200000
+DECLARE
+v_table_cascade EXCEPTION;
+PRAGMA EXCEPTION_INIT(v_table_cascade,-02449);
+BEGIN
+  FOR OBJ IN (SELECT OBJECT_TYPE, OBJECT_NAME
+                FROM USER_OBJECTS
+               WHERE OBJECT_TYPE IN ('PACKAGE', 'PROCEDURE', 'SEQUENCE',
+                      'TABLE', 'VIEW', 'FUNCTION','SYNONYM')
+               ORDER BY OBJECT_TYPE, OBJECT_NAME) LOOP
+    BEGIN 
+       DBMS_OUTPUT.put_line('DROP '||OBJ.OBJECT_TYPE||' '||OBJ.OBJECT_NAME||';');
+       EXECUTE IMMEDIATE 'DROP ' || OBJ.OBJECT_TYPE || ' ' || OBJ.OBJECT_NAME;
+    EXCEPTION
+       WHEN v_table_cascade THEN
+            DBMS_OUTPUT.put_line('DROP '||OBJ.OBJECT_TYPE||' '||OBJ.OBJECT_NAME||' CASCADE constraints;');
+            EXECUTE IMMEDIATE 'DROP ' || OBJ.OBJECT_TYPE || ' ' || OBJ.OBJECT_NAME||'  CASCADE constraints';
+		END;
+  END LOOP;
+END;
+/

@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0031)./encrypt -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<title>加密解密工具</title> 
+ 
+<meta http-equiv="Content-Language" content="zh-CN"> 
+<link rel="stylesheet" href="js/basic.css" type="text/css">
+<link rel="stylesheet" href="js/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="js/my.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/core-min.js"></script>
+<script type="text/javascript" src="js/aes.js"></script>
+<script type="text/javascript" src="js/mode-ecb.js"></script>
+<script type="text/javascript" src="js/tripledes.js"></script>
+<script type="text/javascript" src="js/abbit.js"></script>
+<script type="text/javascript" src="js/rc4.js"></script>
+<script type="text/javascript">
+	    function encrypt(){
+			var key = CryptoJS.enc.Utf8.parse($("#pwd").val());
+		    switch($('input[name="encrypt_type"]:checked').val()){
+				
+		    	case "aes":
+				 var word = CryptoJS.enc.Utf8.parse($.trim($("#msg_source").val()));
+				 var encrypted = CryptoJS.AES.encrypt(word, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+			    	$("#encrypt_result").val(encrypted.toString());
+			    	break;
+		    	case "des":
+		    		$("#encrypt_result").val(CryptoJS.DES.encrypt($("#msg_source").val(),$("#pwd").val()));
+			    	break;
+			    case "rabbit":
+			    	$("#encrypt_result").val(CryptoJS.Rabbit.encrypt($("#msg_source").val(),$("#pwd").val()));
+			    	break;
+			    case "rc4":
+			    	$("#encrypt_result").val(CryptoJS.RC4.encrypt($("#msg_source").val(),$("#pwd").val()));
+			    	break;
+			    case "tripledes":
+			    	$("#encrypt_result").val(CryptoJS.TripleDES.encrypt($("#msg_source").val(),$("#pwd").val()));
+			    	break;
+			}
+	    }
+		function decrypt(){
+			var key = CryptoJS.enc.Utf8.parse($("#pwd").val());
+		    switch($('input[name="encrypt_type"]:checked').val()){
+		    	case "aes":
+				    var word=$.trim($("#encrypt_result").val());
+					var decrypt = CryptoJS.AES.decrypt(word, key, {mode:CryptoJS.mode.ECB,padding: CryptoJS.pad.Pkcs7});
+					$("#msg_source").val(CryptoJS.enc.Utf8.stringify(decrypt).toString());
+			    	break;
+		    	case "des":
+		    		$("#msg_source").val(CryptoJS.DES.decrypt($("#encrypt_result").val(),$("#pwd").val()).toString(CryptoJS.enc.Utf8));
+			    	break;
+			    case "rabbit":
+			    	$("#msg_source").val(CryptoJS.Rabbit.decrypt($("#encrypt_result").val(),$("#pwd").val()).toString(CryptoJS.enc.Utf8));
+			    	break;
+			    case "rc4":
+			    	$("#msg_source").val(CryptoJS.RC4.decrypt($("#encrypt_result").val(),$("#pwd").val()).toString(CryptoJS.enc.Utf8));
+			    	break;
+			    case "tripledes":
+			    	$("#msg_source").val(CryptoJS.TripleDES.decrypt($("#encrypt_result").val(),$("#pwd").val()).toString(CryptoJS.enc.Utf8));
+			    	break;
+			   }
+	    }
+		function doClean(){
+			$("#msg_source").val("");
+			$("#encrypt_result").val("");
+		}
+	</script>
+<body style="background:white">	
+<div id="mainContent" class="wrapper">
+<div class="toolName">加密解密</div>
+	<div class="toolUsing clearfix">
+	</div>
+	<div class="leftBar" style='height:200px'>
+		<div class="title">明文:</div>
+    	<textarea name="message" style='height:400px;' id="msg_source" value="this is a example" onfocus="if(this.value==&#39;this is a example&#39;){this.value=&#39;&#39;;};this.select();" onblur="(this.value==&#39;&#39;)?this.value=&#39;this is a example&#39;:this.value;" class="text_source">this is a example</textarea>
+    </div>
+
+	<div class="operateLR">
+		<div class="OptDetail">
+    		<label>加密算法:</label>
+			<ul>
+                <li><label for="aes" class="radio"><input type="radio" name="encrypt_type" value="aes" checked="checked" id="aes">AES</label></li>
+            	<li><label for="des" class="radio"><input type="radio" name="encrypt_type" value="des" id="des">DES</label></li>
+            	<li><label for="rc4" class="radio"><input type="radio" name="encrypt_type" value="rc4" id="rc4">RC4</label></li>
+    			<li><label for="rabbit" class="radio"><input type="radio" name="encrypt_type" value="rabbit" id="rabbit">Rabbit</label></li>
+    			<li><label for="tripledes" class="radio"><input type="radio" name="encrypt_type" value="tripledes" id="tripledes">TripleDes</label></li>
+            </ul>
+        </div>
+		<div class="OptDetail Button">
+			
+    		<label class="input">密码:
+    		<input type="text" id="pwd" value="key">
+			</label>
+			<ul>
+            <li><button class="btn btn-primary" onclick="javascript:encrypt();">加密-></button></li>
+            <li><button class="btn btn-primary" onclick="javascript:decrypt();"><-解密 </button></li>
+			<li><button class="btn btn-primary" onclick="javascript:doClean();"> 清空 </button></li>
+			</ul>
+        </div>
+	</div>	
+	<div class="rightBar" >
+		<div class="title">密文:</div>
+		<textarea name="cipher" id="encrypt_result" style='height:400px;' onclick="this.focus();this.select();"></textarea>
+	</div>
+	<div id='productionId'>
+	<ul>
+	    <li><h4>使用说明</h4></li><br/>
+		<li>1. 当数据源表<font color='red'>AC_BOM_DATASOURCE</font>配置<font color='blue'>PASSWORD字段需加密</font>时，需要知道<font color='blue'>加密前的密码</font>，采用<font color='red'>AES加密</font>，只需在<font color='red'>"明文框"</font>中填入要<font color='blue'>加密的文本</font></li>
+		<li>2. 当你用<font color='red'>数据库客户端</font>连接数据时<font color='blue'>不知道</font>某个数据库的<font color='red'>密码</font>时，可以通<font color='blue'>查询AC_BOM_DATASOURCE表</font>的<font color='blue'>PASSWORD</font>，填入到<font color='red'>密文框</font>将<font color='blue'>PASSWORD进行解密</font></li>
+	</ul>
+  </div>
+</div>
+
+</body></html>

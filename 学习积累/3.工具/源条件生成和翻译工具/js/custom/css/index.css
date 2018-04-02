@@ -1,0 +1,162 @@
+/**
+ * 首页样式（左边菜单树，tab页及按钮，首页tab页内容，头部，脚部）
+ * default.css中也有一部分是首页的样式，抽空再整理
+ */
+ul,li,span,p,h1,h2 {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+input,img {
+	border: 0px;
+}
+
+.home .tree-root {
+	background: url(../images/memu_bg.gif);
+	padding: 3px 0px;
+}
+
+.head_bg {
+	background: url(../images/body_bg.gif) repeat-x;
+	overflow: hidden;
+	height: 65px;
+}
+
+.portal-header {
+	background: url(../images/logo.png) no-repeat;
+	height: 57px;
+	padding: 0px;
+}
+
+.footerbg {
+	height: 28px;
+	background: #1b4b7b url(../images/footerbg.gif) repeat-x;
+	border: 0px;
+}
+
+.footer {
+	text-align: center;
+	color: #ececec;
+	margin: 0px;
+	padding: 0px;
+	line-height: 28px;
+}
+
+.copyright {
+	z-index:999999999;
+	position:relative;
+	float:right;
+	margin-top:-15px;
+	font-size: 9px;
+	color:#ABABAB;
+}
+
+.submenu,.helper-area {
+	background: #fafafa;
+	height: 100%;
+}
+
+.RoundedCorner {
+	background: url(../images/Operating.gif);
+	display: block;
+	height: 37px;
+	padding-top: 3px;
+}
+
+.rccontent {
+	height: 36px;
+	overflow: hidden;
+	padding: 0px 5px;
+	display: block;
+}
+
+.rccontent span {
+	font-size: 12px;
+	margin: 0px 10px;
+	display: block;
+	font-family: "宋体"
+}
+
+.rccontent img {
+	border: 0px;
+	padding: 0px 5px;
+	margin: 2px 0px;
+}
+
+.head a {
+	color: White;
+	text-decoration: underline;
+}
+
+.head_btn {
+	float: right;
+	padding-right: 10px;
+	padding-top: 12px;
+}
+
+.HI {
+	color: #fff;
+	height: 33px;
+	line-height: 33px;
+	_width: 370px;
+}
+
+.HI li {
+	float: left;
+	margin-left: 1px;
+}
+
+.home_nr {
+	padding-left: 3px;
+}
+
+.node-start,.node-end,.node-middle {
+	background: url(../images/memu_bg.gif);
+	border-bottom: 1px dashed #ccc;
+	background: #ff00ff;
+}
+
+.active {
+	background: #FFF;
+}
+
+.bbit-tree-node-icon {
+	display: none;
+}
+
+.bbit-tree-ec-icon {
+	margin-top: -2px;
+}
+
+.collapse-text {
+	font-weight: bold;
+	font-size: 15px;
+	margin: auto;
+	padding: 4px;
+}
+
+.disabled {
+	filter: alpha(opacity =               60);
+	-moz-opacity: 0.6;
+	-khtml-opacity: 0.6;
+	opacity: 0.6;
+	font-weight: normal;
+}
+
+.actived {
+	filter: alpha(opacity =               100);
+	-moz-opacity: 1;
+	-khtml-opacity: 1;
+	opacity: 1;
+	cursor: pointer;
+}
+
+.actived-move {
+	background: #E0ECFF;
+}
+
+.tabs-panels {
+	padding: 3px;
+	background: #EFEFEF
+}

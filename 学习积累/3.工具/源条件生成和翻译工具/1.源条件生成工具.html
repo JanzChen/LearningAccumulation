@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>jQuery QueryBuilder</title>
+        <link rel="stylesheet" type="text/css" href="./js/custom/css/default.css"/>
+        <link rel="stylesheet" type="text/css" href="./js/custom/css/form.css"/>
+        <link rel="stylesheet" type="text/css" href="./js/easyui/themes/default/easyui.css"/>
+        <link rel="stylesheet" type="text/css" href="./js/custom/css/icon.css">
+        <link rel="stylesheet" type="text/css" href="./js/easyui/themes/icon.css">
+        <script type="text/javascript" src="./js/My97DatePicker/WdatePicker.js"></script>
+        <script type="text/javascript" src="./js/jquery-1.11.3.min.js"></script>
+        <script type="text/javascript" src="./js/jquery.bt.js"></script>
+        <script type="text/javascript" src="./js/easyui/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="./js/custom/jquery.easyui.extension.js"></script>
+        <script type="text/javascript" src="./js/custom/easyui-lang-zh_CN.js"></script>
+        <script type="text/javascript" src="./js/toolkit.js"></script>
+        <script type="text/javascript" src="./js/jsrender.js"></script>
+        <script type="text/javascript" src="./js/queryBuilder/taskcommon.js"></script>
+        <script type="text/javascript" src="./js/queryBuilder/queryBuild.js"></script>
+        <script type="text/javascript" src="./js/demo.js"></script>
+		<style>
+		    #toolWhere{
+			  width:100%;
+			  margin-left:10%;
+			}
+
+			#showWhere{
+			 margin-left:30px;
+			}
+			.outWhere{
+				float:left;
+				margin-left:20px;
+			}
+		</style>
+    </head> 
+    <body>
+		<div style="margin-left:140px;font-size:20px;">
+			<h2>原条件生成工具及solr和sql翻译工具</h2>
+		</div>
+	   <div id="toolWhere">
+			<div id="basic">
+				<!-- 行数据策略需要显示的操作 -->
+				<div id="dataPolicyGroup_1">
+					<!-- 分组序列 -->
+					<div id="groupDiv_1" class="group">
+					</div>
+					<!-- 条件序列 -->
+					<div id="conditionDiv_1" class="condition">
+					</div>
+				</div>
+			</div>
+			<br/>
+			<!-- 操作按钮 -->
+			<div id="oprateButton" style="float: left;margin-top:50px;width:100%">
+				<a class="easyui-linkbutton" href="javascript:void(0)" onclick="easyuiQueryBuild.addGroup(1)">
+					增加分组
+				</a>
+				<a class="easyui-linkbutton" href="javascript:void(0)" onclick="easyuiQueryBuild.addCondition(1)">
+					增加条件
+				</a>
+				<a class="easyui-linkbutton" href="javascript:void(0)" onclick="clearQueryCondition()">
+					清空
+				</a>
+				<a class="easyui-linkbutton" href="javascript:void(0)" onclick="demoCondition()">Demo</a>
+				<a class="easyui-linkbutton" href="javascript:void(0)" onclick="showSQL()">生成sql</a>
+				<a class="easyui-linkbutton" href="javascript:void(0)" onclick="showJson()">查看生成的Json</a>
+				<a class="easyui-linkbutton" href="javascript:void(0)" onclick="translateJson()">翻译json</a><br/>
+			</div>
+		</div>
+		<div id="showWhere">
+			<div class="outWhere">
+				<h5>源条件json</h5>
+				<textarea id="outJson" rows="20" cols="50"></textarea>
+			</div>
+			<div class="outWhere">
+				<h5>源条件where条件</h5>
+				<textarea id="outSql" rows="20" cols="50"></textarea>
+			</div>
+			<div class="outWhere">
+				<h5>源条件solr条件</h5>
+				<textarea id="outSolrSql" rows="20" cols="50"></textarea>
+			</div>
+		</div>
+        <br/>
+		<!--jsrender的模板 -->
+        <!-- 增加的条件 -->
+        <script id="dataPolicyRender" type="text/x-jsrender">
+				<div id="fieldDiv_{{:chilTime}}" style="float:left;text-align:left;" align='left'></div>
+				<div id="opDiv_{{:chilTime}}" style="float:left"></div>
+				<div id="widgetType_{{:chilTime}}" style="display: none;float:left"></div>
+				<div id="valueSelect_{{:chilTime}}" style="width: 157px;float:left"></div>
+				<a href="javascript:void(0)" id="delBtn" style="font-size:14px" onclick="easyuiQueryBuild.removeCondition({{:chilTime}})">删除</a>
+        </script>
+        <!-- 返回操作符 -->
+        <script id="opMap" type="text/x-jsrender">
+			 <select id="op_{{:time}}" class="easyui-combobox" name="state" style="width: 95px;" panelHeight="100px" required="true" editable="false">
+				<option value="eq">相等</option>
+				<option value="not">不相等</option>
+				<option value="lar">大于</option>
+				<option value="less">小于</option>
+				<option value="larEp">大于等于</option>
+				<option value="lessEp">小于等于</option>
+				<option value="inner">包括</option>
+				<option value="notInner">不包括</option>
+				<option value="leftLike">左模糊匹配</option>
+				<option value="rightLike">右模糊匹配</option>
+				<option value="leftRightLike">左右模糊匹配</option>
+			</select>
+        </script>
+    </body>
+</html>

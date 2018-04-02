@@ -1,0 +1,217 @@
+<!doctype>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>solr数据核查工具</title>
+<style type="text/css">
+#main {
+	height:100%;
+	width:100%;
+}
+#left {
+	float: left;
+	height:470px;
+	width: 23%;
+	margin-left:1%;
+	
+}
+#right {
+	float: left;
+    height: 470px;
+	width:  25%;
+	margin-left:1%;
+	
+}
+#sourth {
+	float: left;
+    height: 470px;
+	width:  23%;
+	margin-left:1%;
+	
+}
+#north{
+	float: left;
+    height: 470px;
+	width:  23%;
+	margin-left:1%;
+}
+#btns{
+	float:none;
+	height:100px;
+	margin-top:10px;
+}
+.toolName {
+	line-height:24px;
+	font-size: 24px;
+	color: #777;
+	margin-top: 10px;
+	margin-bottom:20px;
+}
+textarea{
+	border:1px solid blue;
+}
+</style>
+<script type="text/javascript" src="json2.js"></script>
+<script type="text/javascript">
+ function doFormat(){
+	var tableName=document.getElementById('tabName').value;
+	var solrCoreData=document.getElementById('bfJson').value;
+	
+	if(tableName==''||tableName==undefined){
+	  alert("请填写core名称");
+	  return;
+	}
+	if(solrCoreData==''||solrCoreData==undefined){
+	 alert("请请填写solrcore json数据");
+	 return;
+	}
+	var bfJson="["+solrCoreData+"]";
+	//var json=eval('(' + bfJson + ')');
+	var json=JSON.parse(bfJson);
+	//alert(json);
+	var field='';
+	var fieldVal='';
+	var sqlQuery='';
+	for(var i=0;i<json.length;i++){ 
+		alert(JSON.stringify(json[i]));
+		var tempObj=json[i];
+		sqlQuery+=tempObj['testName']+',';
+	 }
+	var result=field+'\r\n'+fieldVal;
+	//去掉最后一个逗号
+	sqlQuery=sqlQuery.substring(0,sqlQuery.length-1);
+	document.getElementById('afJsonName').value="";
+	document.getElementById('afJsonName').value=field;
+	document.getElementById('afJsonVal').value="";
+	document.getElementById('afJsonVal').value=fieldVal;
+	document.getElementById('fieldQuery').value="";
+	document.getElementById('fieldQuery').value=sqlQuery;
+	//清空sql
+	document.getElementById('sql').value="";
+
+	
+	//if(tableName!=undefined&&tableName.trim()!=""){
+		//doSql();
+	//}
+ }
+ function doSql(){
+	document.getElementById('sql').value="";
+	var fields=document.getElementById('fieldQuery').value;
+	var tableName=document.getElementById('tabName').value;
+	//alert(tableName);
+	if(fields!=""&&fields!=undefined){
+	   var sql="select "+fields.trim()+" from "+tableName;
+	   document.getElementById('sql').value=sql;
+	}else{
+	   alert("查询字段不能为空");
+	}
+ }
+ function doClean(){
+	document.getElementById('bfJson').value="";
+	document.getElementById('afJsonName').value="";
+	document.getElementById('afJsonVal').value="";
+	document.getElementById('fieldQuery').value="";
+	document.getElementById('tabName').value="";
+	document.getElementById('sql').value=""
+ }
+
+ function formatData(){
+	var dataStr=document.getElementById("afJsonVal").value;
+	var arr=dataStr.split('\t');
+	var fieldVal='';
+	for(var i=0;i<arr.length;i++){
+		if(!isNaN(arr[i])&&arr[i].trim()!=''){
+				fieldVal+='\''+arr[i]+'\t';
+		}else{
+				fieldVal+=arr[i]+'\t';
+		}	
+	}
+	
+	document.getElementById('afJsonVal').value="";
+	document.getElementById('afJsonVal').value=fieldVal;
+ 
+ }
+ function doCompare(){
+      var flag=true;
+	  var bfJson1=JSON.parse("["+document.getElementById('bfJson').value.trim()+"]");
+      var bfJson2=JSON.parse("["+document.getElementById('afJsonName').value.trim()+"]");
+	  for(var i=0;i<bfJson1.length;i++){ 
+		for(var key in bfJson1[i]){ 
+			if(bfJson1[i][key]==bfJson2[i][key]){
+			  flag=true;
+			}else{
+			  flag=false;
+			  alert("不相等");
+			  return;
+			}		
+		}
+	 }
+	 if(flag){
+	   alert("相等");
+	 }
+ 
+ }
+
+ function addSybol(){
+	document.getElementById("afJsonVal").value='';
+	var dataStr=document.getElementById("afJsonName").value.trim();
+	var arr=dataStr.split('\n');
+	var formatStr='';
+	for (var i=0;i<arr.length;i++ ){
+		if(i==arr.length-1){
+		formatStr+=arr[i]+'\n'
+		   break;
+		}else{
+			formatStr+=arr[i]+','+'\n'
+		}	
+	}
+	if(formatStr.trim()!=''){
+		document.getElementById("afJsonVal").value=formatStr;
+	}
+ }
+</script>
+</head>
+	
+<body>
+<div class="toolName">solr数据核查工具</div>
+<div id="main">
+  <div id="left">
+	<center><h5 style='margin-top:0px;margin-bottom:10px'>solr core 数据&nbsp;&nbsp;&nbsp;&nbsp;</h5></center>
+	core名称：<input type='text' id='tabName'/><br/><br/>
+	json数据<br/><textarea rows="21" cols="33" id='bfJson'></textarea>
+  </div>
+  
+  <div id="north">
+    <center><h5 style='margin-top:0px;margin-bottom:10px'>查询sql&nbsp;&nbsp;&nbsp;&nbsp;</h5></center>
+	查询字段：<input type="text" id="fieldQuery"><br/><br/>	
+	sql结果<br/>
+	<textarea rows="21" cols="33" id='sql'></textarea>
+  </div>
+  <div id="right">
+	<center><h5 style='margin-top:0px;margin-bottom:10px'>查询结果字段&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5></center>
+	<textarea rows="25" cols="35" id='afJsonName'  style='margin-left:16px'></textarea>
+  </div>
+  <div id="sourth">
+    <center><h5 style='margin-top:0px;margin-bottom:10px'>查询结果值&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h5></center>
+	<textarea rows="25" cols="35" id='afJsonVal'></textarea></br>
+  </div>
+  <div id="btns">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <input type='button' value='格式化json数据' onclick='doFormat()'>&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type='button' value='拼装sql' onclick='doSql()'>&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type='button' value='格式数据' onclick='formatData()'>&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type='button' value='比较json' onclick='doCompare()'>&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type='button' value='添加逗号' onclick='addSybol()'>&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type='button' value="清空" onclick="doClean()"/>
+	<h5 style="margin-top:10px;margin-bottom:0px">使用说明</h5>
+	<ol style='margin-top:10px'>
+		<li>格式化json数据：<font color='blue'>（需要填写json和表名，不填表名，不会生成sql）</font>格式化solr那边的json数据，将json的key value值<font color='red'>分离</font>到<font color='red'>“查询结果字段”和“查询结果值”</font>的黑色边框中，同时生成<font color='blue'>sql</font>到 <font color='red'>sql的黑色框</font>中，而且<font color='red'>“查询结果字段”</font>用<font color='blue'>逗号分开</font>显示在<font color='red'>“查询字段”</font>中</li>
+		<li>拼装sql：<font color='blue'>（需要填写表名和查询字段）</font>根据查询字段和表名，会自动生成sql，此sql用是来<font color='red'>查询</font>oracle中间表的数据，<font color='red'>注意要自写加上where条件</font></li>
+		<li>格式数据：<font color='blue'>（在查询字段中填入查询的结果值）</font>把从navcat客户查询出来的数据（<font color='blue'>针对数字类型</font>）进行加工成Excel的可以识别的数据，即在数字前加上单引号("'"),navcat是可以导出excel格式数据</li>
+		<li>比较json：<font color='blue'>（查询结果字段填入json1和查询结果值填入json2）</font>比较两个json<font color='red'>是否相等</font>，主要是用核查任务的配置是否与上一个版是一样，一般任务抽取过程中<font color='red'>有异常时</font>才会用</li>
+		<li>清空:当前所有表格中的内容</li>
+	</ol>
+  </div>
+</div>
+
+</body>
+</html>

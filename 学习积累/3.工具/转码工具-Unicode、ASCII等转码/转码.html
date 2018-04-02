@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0031)./encrypt -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+<title>在线加密解密</title> 
+ 
+<meta http-equiv="Content-Language" content="zh-CN"> 
+<link rel="stylesheet" href="js/basic.css" type="text/css">
+<link rel="stylesheet" href="js/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="js/my.css" type="text/css">
+<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/code.js"></script>
+<script type="text/javascript">
+$(document).ready(function (){
+	$("#en_tip").popover({
+		'title':'encodeURI',
+		'content':'使用Javascript encodeURI() 函数，用于完整的URL编码。',
+		'placement':'right'
+    });
+	$("#co_tip").popover({
+		'title':'encodeURIComponent',
+		'content':'使用Javascript encodeURIComponent() 函数，用于拼接URL的参数。',
+		'placement':'right'
+    });
+	changeDiv('unicode');
+});
+
+function changeDiv(id){
+	var arr=['unicode','utf8','ascii','url'];
+	for(var i=0;i<arr.length;i++){
+	 if(id===arr[i]){
+		$("#"+id+"Div").show();
+		$("#"+id+"Li").addClass("active");
+		if(id=='url'){
+			$("#nativeDiv").html("Url:");
+			$("#resultDiv").html("编码结果");
+		}else{
+			$("#nativeDiv").html("Native");
+			$("#resultDiv").html(arr[i]);
+		}
+	 }else{
+		$("#"+arr[i]+"Div").hide();
+		$("#"+arr[i]+"Li").removeClass("active");
+	 }
+	}
+	
+}
+
+function doClean(){
+	$("#a_source").val("");
+	$("#n_source").val("");
+}
+</script>
+<body style="background:white">	
+<div id="mainContent" class="wrapper">
+<div class="toolName">转码工具</div>
+<div class="toolsTab  clearfix">
+	<ul class="nav nav-tabs">
+		<li id='unicodeLi' class="active"><a href="javascript:void(0)" onclick="changeDiv('unicode')">Native/Unicode</a></li>
+		<li id='utf8Li'><a href="javascript:void(0)" onclick="changeDiv('utf8')" >Native/UTF-8</a></li>
+		<li id='asciiLi'><a href="javascript:void(0)" onclick="changeDiv('ascii')" >Native/ASCII</a></li>
+		<li id='urlLi'><a href="javascript:void(0)" onclick="changeDiv('url')">URL转码</a></li>
+	</ul>
+</div>
+	<div class="toolUsing clearfix">
+	</div>
+	<div class="leftBar" style="wdith:350px">
+		<div id='nativeDiv' class="title">Native:</div>
+    	<textarea name="message" id="a_source"  value="this is a example" onfocus="if(this.value==&#39;this is a example&#39;){this.value=&#39;&#39;;};this.select();" onblur="(this.value==&#39;&#39;)?this.value=&#39;this is a example&#39;:this.value;" class="text_source">this is a example</textarea>
+    </div>
+		<div id='unicodeDiv' class="OptDetail Button" style="float:left;margin-top:20%;">
+			<ul style="width:90px">
+            <li><button class="btn btn-primary" onclick="javascript:Native2Unicode();">Unicode-></button></li>
+            <li><button class="btn btn-primary" onclick="javascript:Unicode2Native();"><-Native </button></li>
+			<li><button class="btn btn-primary" onclick="javascript:doClean();"> 清空 </button></li>
+			</ul>
+        </div>
+		<div id='utf8Div' class="OptDetail Button" style="float:left;margin-top:20%;">
+    		<label class="checkbox" ><input type="checkbox" name="ignoreLetter" style="margin-left:8px" id="ignoreLetter" checked="true">不转换字母和数字</label>
+			<br>
+			<ul style="width:90px">
+            <li><button class="btn btn-primary" onclick="javascript:Native2UTF8();">UTF-8-></button></li>
+            <li><button class="btn btn-primary" onclick="javascript:UTF82Native();"><-Native </button></li>
+			<li><button class="btn btn-primary" onclick="javascript:doClean();"> 清空 </button></li>
+			</ul>
+        </div>
+		<div id='asciiDiv' class="OptDetail Button" style="float:left;margin-top:20%;">
+    		<label class="checkbox" ><input type="checkbox" name="ignoreLetter" style="margin-left:8px" id="ignoreLetter" checked="true">不转换字母和数字</label>
+			<br>
+			<ul style="width:90px">
+            <li><button class="btn btn-primary" onclick="javascript:native2ascii();">ASCII-></button></li>
+            <li><button class="btn btn-primary" onclick="javascript:ascii2native();"><-Native </button></li>
+			<li><button class="btn btn-primary" onclick="javascript:doClean();"> 清空 </button></li>
+			</ul>
+        </div>
+		<div id='urlDiv' class="OptDetail Button" style="float:left;margin-top:20%;">
+			<label class="radio" id="en_tip" data-original-title=""><input name="_type" checked="checked" type="radio">encodeURI</label>
+			<label class="radio" id="co_tip" data-original-title=""><input name="_type" id="co_t" type="radio">encodeURIComponent</label>
+			<br>
+			<ul style="width:90px">
+            <li><button class="btn btn-primary" onclick="javascript:encode_uri();">URL编码-></button></li>
+            <li><button class="btn btn-primary" onclick="javascript:decode_uri();"><-URL解码 </button></li>
+			<li><button class="btn btn-primary" onclick="javascript:doClean();"> 清空 </button></li>
+			</ul>
+        </div>
+
+	</div>
+	
+	<div class="rightBar" style="float:left;margin-left:10px;width:350px;height:500px">
+		<div id='resultDiv' class="title">ASCII:</div>
+		<textarea name="cipher" id="n_source"  onclick="this.focus();this.select();"></textarea>
+	</div>
+</div>
+</body></html>

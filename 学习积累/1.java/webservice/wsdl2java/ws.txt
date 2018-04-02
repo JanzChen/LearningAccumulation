@@ -1,0 +1,7 @@
+解压axis2-1.7.6-bin.zip，打开目录\axis2-1.7.6\bin，输入命令：
+wsdl2java -uri http://xx.xx.xx.xx:8080/aaaa/services/aaaaWebService?wsdl
+
+即可生成\axis2-1.7.6\src 文件夹，并且里面含有自动生成的java文件2个。
+之后把java文件引入自己的项目，另外需要导入《axis2额外引入jar包.png》图片内的jar包，
+如果启动项目还是报错，请继续检查缺失了哪个jar，在\axis2-1.7.6\lib里面找。
+
