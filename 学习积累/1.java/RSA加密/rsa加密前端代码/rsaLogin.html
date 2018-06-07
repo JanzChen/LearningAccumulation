@@ -7,11 +7,13 @@
     <script type="text/javascript">  
 	function rsalogin(){  
 		var thisPwd = document.getElementById("password").value;  
-		var publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCsm7vXjYGsqQnyiz4C1p06m8tloIhP1FJgqFAmJXXX/yonYKKOfA0VFWV26UTD34ww6S0ODsCyR1eFd8EX/JVRaicgt1L9e0ItWjgrSJR5LMLqwqLeZGDIIewsbPbyU66GWjJR486fa4eytEYzPmZ+qaaTonNZEFq/5tS9Cxm7nQIDAQAB";
+		var publicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAivq73VMZesGxy0v68GFwkkrHlz5SXBgveiMpuUVe+K6DYRcEoWblCUi4AJApWrhBPjV7iqoMVzNlqsWIyKO5OaYUHzVTV3yLIdfbIU/MLvbtwIwBmnvd+wlmTkNvMFJziNsO5geuWkwHCd3iRmhWPX95m/npKOk7swRqU6L6Fr8OrHEkkYIf850sre8bhknXrLg40AiKrjf90qC1zLHfndbz6rOZlu0+2PhfmViX0F0OBm74UeYxz3NhG7pj5HJ2NinN8HUDDyeQNKQ89vUkmzEainD4Cyiba6o4GYFOxs2Z57IyI5mOwpPoUkpWwFLc5JMMeOlXNQVanJVgQyuOOwIDAQAB";
 		var encrypt = new JSEncrypt();
 		encrypt.setPublicKey(publicKey);
 		// 加密
 		var data = encrypt.encrypt(thisPwd);
+		//+号的处理：因为数据在网络上传输时，非字母数字字符都将被替换成百分号（%）后跟两位十六进制数，而base64编码在传输到后端的时候，+会变成空格，因此先替换掉。
+		data = encodeURI(data).replace(/\+/g, '%2B');
 		alert(data);
 	} 
 </script>  
