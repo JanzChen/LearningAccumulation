@@ -1,0 +1,39 @@
+<html>  
+<head>  
+    <title>login</title>  
+  
+    <script type="text/javascript" src="jsencrypt.min.js"></script> 
+      
+    <script type="text/javascript">  
+	function rsalogin(){  
+		var thisPwd = document.getElementById("password").value;  
+		var publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCsm7vXjYGsqQnyiz4C1p06m8tloIhP1FJgqFAmJXXX/yonYKKOfA0VFWV26UTD34ww6S0ODsCyR1eFd8EX/JVRaicgt1L9e0ItWjgrSJR5LMLqwqLeZGDIIewsbPbyU66GWjJR486fa4eytEYzPmZ+qaaTonNZEFq/5tS9Cxm7nQIDAQAB";
+		var encrypt = new JSEncrypt();
+		encrypt.setPublicKey(publicKey);
+		// 加密
+		var data = encrypt.encrypt(thisPwd);
+		alert(data);
+	} 
+</script>  
+</head>  
+  
+<body>  
+    <form method="post" name="loginForm" target=_blank>  
+        <table border="0">  
+            <tr>  
+                <td>  
+                    Password:  
+                </td>  
+                <td>  
+                    <input type='text' name="password" id=password style='width:400px' value="my passwd"/>  
+                </td>  
+            </tr>  
+            <tr>  
+                <td colspan="2" align="center">  
+                    <input type="button" value = "submit" onclick="rsalogin();" />  
+                </td>  
+            </tr>  
+        </table>  
+    </form>  
+</body>  
+</html>  
